@@ -5,7 +5,7 @@ SG_ID="sg-097ab76e8d557c4b9" # replace with your SG ID
 ZONE_ID="Z03076873JCXQT5FHA6WQ" # replace with your ID
 DOMAIN_NAME="prav4cloud.online"
 
-for instance in $@ # mongodb redis mysql
+for instance in $@ # mongodb redis mysql catalogue
 do
     INSTANCE_ID=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t3.micro --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" --query 'Instances[0].InstanceId' --output text)
 
