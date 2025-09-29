@@ -12,6 +12,7 @@ SCRIPT_NAME=$( echo $0 | cut -d "." -f1 )
 SCRIPT_DIR=$PWD
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log" #/var/log/shell-roboshop/shipping.log
 MYSQL_HOST=mysql.prav4cloud.online
+MONGODB_HOST=mongodb.prav4cloud.online
 START_TIME=$(date +%s)
 
 mkdir -p $LOG_FOLDER 
@@ -51,18 +52,16 @@ VALIDATE $? "Creating directory"
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading the shipping application"
 
-cd /app &>>$LOG_FILE
+cd /app 
 VALIDATE $? "Change directory"
 
-rm -rf /app/* &>>$LOG_FILE
+rm -rf /app/* 
 VALIDATE $? "Removing existing code"
-
-mvn clean package &>>$LOG_FILE
-VALIDATE $? "Install dependencies"
 
 unzip /tmp/shipping.zip &>>$LOG_FILE
 VALIDATE $? "unzip the application code"
 
+mvn clean package &>>$LOG_FILE
 mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service &>>$LOG_FILE
