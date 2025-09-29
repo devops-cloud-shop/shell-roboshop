@@ -1,7 +1,7 @@
 #!/bin/bash
 
 AMI_ID="ami-09c813fb71547fc4f"
-SG_ID="sg-097ab76e8d557c4b9" # replace with your SG ID
+SG_ID="sg-0ff8662b2bbe0b4bc" # replace with your SG ID
 ZONE_ID="Z03076873JCXQT5FHA6WQ" # replace with your ID
 DOMAIN_NAME="prav4cloud.online"
 
