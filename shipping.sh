@@ -51,19 +51,19 @@ VALIDATE $? "Creating directory"
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading the shipping application"
 
-cd /app
+cd /app &>>$LOG_FILE
 VALIDATE $? "Change directory"
 
-rm -rf /app/*
+rm -rf /app/* &>>$LOG_FILE
 VALIDATE $? "Removing existing code"
 
-mvn clean package 
+mvn clean package &>>$LOG_FILE
 VALIDATE $? "Install dependencies"
 
-unzip /tmp/shipping.zip
+unzip /tmp/shipping.zip &>>$LOG_FILE
 VALIDATE $? "unzip the application code"
 
-mv target/shipping-1.0.jar shipping.jar
+mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service &>>$LOG_FILE
 VALIDATE $? "Copying systemctl service"
